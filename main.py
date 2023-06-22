@@ -64,14 +64,13 @@ def dibujar(ventana, array):
         # dibujar rectángulo
         pygame.draw.rect(ventana, color, (x, y, ancho_barra, alto_barra))
 
-    time.sleep(0.05)
+    time.sleep(0.002)
     pygame.display.update()
 
 
 def principal():
     # cantidad de elementos del array
-    N = 50
-
+    N = 1080
     # determinamos ancho y alto de la ventana. El máximo es 1080x360
     max_ancho = 1080
     alto = 360
