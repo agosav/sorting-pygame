@@ -1,6 +1,15 @@
 # Paso a paso: Visualizador de algoritmos de ordenamiento
 ![](/portada.png)
 
+En este Paso a paso vamos a hacer un visualizador de algoritmos de ordenamiento usando la librería Pygame.
+
+Algoritmos:
+- Bubble Sort
+- Insertion Sort
+- Shell Sort
+- Heap Sort
+- Quick Sort
+
 ---
 
 ## Parte 1: Preparación del proyecto
