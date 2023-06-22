@@ -10,31 +10,34 @@
 En esta parte del proyecto solo vamos a crear un nuevo proyecto en Pycharm 
 y vamos a instalar la librería `Pygame`.
 
-Podemos hacerlo usando la terminal, la cuál la podemos encontrar abajo a la izquierda en Pycharm. Una vez abierta la terminal, eescribiendo el comando:
+Podemos hacerlo usando la terminal, la cuál la podemos encontrar abajo a la izquierda en Pycharm. Una vez abierta la terminal, escribimos el comando:
 
 `pip install pygame`
 
-Y listo. En caso de estar con las compus de la facultad, capaz no se puede instalar pygame así porque no tienen autorización.
+Y listo.
 
-En este caso, podemos instalarlo desde Pycharm, siguiendo estos pasos:
-
-1) Una vez abierto el proyecto en PyCharm andá a la barra de menú superior. 
-   
-2) Hacé click en "File" (Archivo) y selecciona "Settings" (Configuración). 
-   
-3) En la ventana de configuración, busca y selecciona "Project: [nombre del proyecto]".
-   
-4) Ahora seleccioná "Python Interpreter" (Intérprete de Python).
-
-5) En la parte inferior izquierda de la ventana, hacé clic en el botón "+" para agregar un nuevo paquete.
-
-6) En la ventana emergente "Available Packages" (Paquetes Disponibles), escribí "pygame" en el cuadro de búsqueda.
-
-7) Selecciona "pygame" en la lista de resultados y haz clic en el botón "Install Package" (Instalar Paquete).
-
-8) Espera a que PyCharm descargue e instale la librería pygame.
-
-9) ¡Listo!
+> En el caso de estar con las compus de la facultad, capaz no se puede instalar pygame de esta manera porque no tienen 
+los permisos necesarios.
+>
+>En este caso, podemos instalarlo desde Pycharm, siguiendo estos pasos:
+>
+>1) Una vez abierto el proyecto en PyCharm andá a la barra de menú superior. 
+>
+>2) Hacé click en "File" (Archivo) y seleccioná "Settings" (Configuración). 
+>   
+>3) En la ventana de configuración, busca y selecciona "Project: [nombre del proyecto]".
+>   
+>4) Ahora seleccioná "Python Interpreter" (Intérprete de Python).
+>
+>5) En la parte inferior izquierda de la ventana, hacé clic en el botón "+" para agregar un nuevo paquete.
+>
+>6) En la ventana emergente "Available Packages" (Paquetes Disponibles), escribí "pygame" en el cuadro de búsqueda.
+>
+>7) Seleccioná "pygame" en la lista de resultados y haz clic en el botón "Install Package" (Instalar Paquete).
+>
+>8) Espera a que PyCharm descargue e instale la librería pygame.
+>
+>9) ¡Listo!
 
 ### Estructurar el proyecto
 
@@ -103,7 +106,7 @@ Nosotros vamos a usar 3 teclas en este paso a paso:
 
 En pygame, cada una de estas teclas están representadas por diferentes variables.
 
-Sin enroscarnos mucho, así quedaría todo:
+Sin enroscarnos mucho en detalles relacionados a la librería, así quedaría todo:
 
 ```python
 import pygame
@@ -190,11 +193,13 @@ if __name__ == '__main__':
 
 ## Parte 3: Crear array y dibujarla
 
+### Crear array desordenada
+
 Nosotros lo que vamos a hacer es tener creada una array ordenada al comienzo y la vamos a desordenar. 
 Cada vez que el usuario quiera resetear el programa, solo vamos a volver a desordenarla.
 
-Esta array va a ser así: [1, 2, 3, 4, 5,..., N]. Siendo `N` una variable global que vamos a escribir arriba del todo 
-que va a representar la cantidad de elementos de la array.
+Esta array va a ser así: [1, 2, 3, 4, 5,..., N]. Siendo `N` una variable que va a representar la cantidad de elementos 
+de la array.
 
 ```python
 N = 30
@@ -216,19 +221,21 @@ def principal():
     ventana = pygame.display.set_mode((600, 300))
 ```
 
+### Dibujar array
+
 Ahora vamos a escribir una función que se llame `dibujar()`, que reciba como parámetros la ventana y el array.
 
-Esta función va a dibujar `N` cantidad de barras verticales. Estas barras van a representar el arreglo. 
-Todas las barras juntas van a ocupar toda la ventana a lo ancho y a variar de altura según el valor de cada número.
+Esta función va a dibujar `N` cantidad de barras verticales en la ventana. Estas barras van a representar el arreglo. 
+Todas las barras juntas van a ocupar toda la ventana a lo ancho y van a variar de altura según el valor de cada número.
 
 > Entonces, para saber el ancho de cada barra, solo tenemos que dividir el ancho de la ventana por `N`.
-
+>
 > Y para calcular el alto de cada barra tenemos que hacer regla de 3 simple. El valor más pequeño del arreglo (1), 
 > va a ser la barra más baja; y el valor más grande del arreglo (n) va a ser la barra más alta y va a ser tan alta como 
-> la ventana.
-
->Es decir, si la `altura de la ventana` fuese de 300 píxeles, y `N` fuese 30, por regla de 3 simple podemos determinar 
-> el tamaño de todas las otras barras del arreglo.
+> la ventana. Sabiendo esto podemos determinar la altura de cualquier barra del arreglo.
+>
+> Por ejemplo, si la `altura de la ventana` fuese de 300 píxeles, y `N` fuese 30, la barra que represente el número 
+> `24` va a ser `24 * 300 / 30 = 240`.
 
 Para saber el ancho y el alto en píxeles de la ventana podemos usar las funcioens `.get_width()` y `.get_height()`.
 
@@ -238,7 +245,7 @@ Esto se hace con la función `pygame.draw.rect()` a la cuál le vamos a pasar 4 
 
 - La ventana
 - El color del rectángulo
-- Una tupla con 4 valores:
+- Una tupla con 4 números enteros:
   
     - La coordenada x del punto donde va a estar situada la esquina superior izquierda del rectángulo
 
@@ -294,7 +301,8 @@ def dibujar(ventana, array):
 ```
 
 >La línea donde escribimos `time.sleep(0,05)` es necesaria porque sino la función se va a ejecutar tan rápido como 
-nuestra computadora lo permita y capaz es demasiado rápido y no podemos apreciar el algoritmo.
+nuestra computadora lo permita y capaz es demasiado rápido y no podemos apreciar el algoritmo. Podemos cambiar este 
+> valor a gusto.
 
 > La línea donde escribimos `pygame.display.update()` también es necesaria porque sino no vamos a ver ningún cambio en 
 > la ventana.
@@ -349,11 +357,20 @@ ancho total de la ventana, porque 35 * 17 = 595, entonces sobrarían 5 píxeles.
 >    ancho = max_ancho // n * n
 >```
 > 
-> Y quedaría así integrándolo al resto de la función:
+> Borremos las siguientes líneas de la función principal:
 > 
 > ```python
-> def principal()
->     # ==============
+>     N = 30
+>     array = [num for num in range(1, N + 1)]
+>     random.shuffle(array)
+>     
+>     pygame.init()
+>     ventana = pygame.display.set_mode((600, 300))
+> ```
+> 
+> Y las intercambiemos por las siguientes:
+> 
+> ```python
 >     N = 50
 > 
 >     max_ancho = 1080
@@ -366,12 +383,6 @@ ancho total de la ventana, porque 35 * 17 = 595, entonces sobrarían 5 píxeles.
 > 
 >     pygame.init()
 >     ventana = pygame.display.set_mode((ancho, alto))
->     # ==============
-> 
->     dibujar(ventana, array)
-> 
->     abierto = True
->     while abierto:
 >```
 > 
 > Ahora deberíamos poder cambiar el valor de `N` a nuestro antojo sin pensar en ese cachito sobrante a la derecha.
@@ -379,6 +390,8 @@ ancho total de la ventana, porque 35 * 17 = 595, entonces sobrarían 5 píxeles.
 ---
 
 ## Parte 4: Crear algoritmo y visualizar dinámicamente
+
+### Ordenar
 
 Ya tenemos todo listo para ir a nuestro archivo `algoritmos.py` y escribir nuestro primer algoritmo de ordenamiento.
 
@@ -416,7 +429,12 @@ Ya podríamos llamar `bubble_sort()` al apretar **espacio**, en `main.py`. Aquí
                     # ================
 ```
 
-Vamos a agregar también que al apretar la tecla **R** mezclemos el array y la vamos a dibujar.
+¡Listo! Ya podemos visualizar nuestro primer algoritmo. Podemos probar con distintos valores para `N` y cambiando la 
+velocidad de la función `dibujar()` para ver cómo se comporta el programa.
+
+### Resetear
+
+Vamos a agregar también que al apretar la tecla **R** mezclemos y dibujemos el array.
 
 Como esto es algo que vamos a repetir un par de veces más a lo largo del programa, lo vamos a escribir en una función 
 que se llame `resetear()`:
@@ -436,22 +454,19 @@ Entonces, al apretar la **R**, llamemos esta función:
                     # ================
 ```
 
-¡Listo! Ya tenemos un visualizador de un algoritmo. Podemos probar con distintos valores para `N` y cambiando la 
-velocidad de la función `dibujar()` para ver cómo se comporta el programa.
-
 > Ya podríamos pasar al siguiente paso, pero vamos a pulir algunos detallitos.
 > 
 > Ahora mismo la tecla **R** nos permite resetear el programa, pero solo si no está ejecutándose un algoritmo.
 > 
-> Esto es porque mientras se está ejecutando el algoritmo, estamos adentro de una iteración del ciclo for donde iteramos 
-> los inputs del usuario. Recién al terminar el algoritmo, pygame va a darse cuenta de que el usuario apretó la tecla 
-> **R**.
+> Esto es porque mientras se está ejecutando el algoritmo, estamos adentro de una iteración del ciclo for (en la que 
+> iteramos los inputs del usuario). Recién al terminar el algoritmo, vamos a pasar a la siguiente iteración y 
+> recién ahí pygame va a darse cuenta de que el usuario apretó la tecla **R**.
 > 
 > Para cambiar esto, necesitamos que cada vez que se haga una iteración del algoritmo, preguntemos si el usuario apretó 
 > la tecla **R**. Si el usuario apretó la tecla **R** necesitamos parar la iteración del algoritmo. Esto lo vamos a 
 > hacer creando una clase `Exception`. Como esto se escapa de los temas de la materia, no vamos a explicarlo ahora.
 > 
-> Resumidamente, vamos a agregar el siguiente código en `main.py`:
+> Resumidamente, vamos a agregar el siguiente código al comienzo de `main.py`:
 > 
 > ```python
 > class StopSorting(Exception):
@@ -473,10 +488,12 @@ velocidad de la función `dibujar()` para ver cómo se comporta el programa.
 > 
 > ```python
 >                 elif event.key == pygame.K_SPACE:
+>                     # ================
 >                     try:
 >                         bubble_sort(ventana, array, mostrar_intercambio)
 >                     except StopSorting:
 >                         resetear(ventana, array)
+>                     # ================
 >```
 > 
 > ¡Listo! Ya deberíamos poder resetear el programa con la tecla **R** mientras se está ejecutando el algoritmo.
@@ -484,6 +501,8 @@ velocidad de la función `dibujar()` para ver cómo se comporta el programa.
 ---
 
 ## Parte 5: Agregar algoritmos
+
+### Agregamos el código de los algoritmos
 
 Vamos a agregar los otros algoritmos vistos en clase:
 - `Insertion Sort`
@@ -605,8 +624,10 @@ def quick_sort(ventana, v,  mostrar_intercambio):
 Ahora, si vamos a donde llamamos a `bubble_sort()` y ponemos el nombre de otro algoritmo, deberíamos poder ver otro 
 algoritmo.
 
-Esto no tiene mucha gracia ya que para ver otro algoritmo deberíamos cerrar el programa y cambiar manualmente otro 
-algoritmo.
+### Cambiar algoritmo actual con flechitas
+
+Esto que hicimos hasta ahora no tiene mucha gracia ya que para ver otro algoritmo deberíamos cerrar el programa y 
+escribir manualmente la función de otro algoritmo.
 
 Para hacerlo más dinámico, vamos a guardar todos los algoritmos en una lista y vamos a guardar en una variable el 
 índice del algoritmo actual.
@@ -642,12 +663,12 @@ def principal():
 ````
 
 
-Ahora vamos a escribir una función que sume o reste 1 al índice, para ir cambiando de algoritmo.
+Ahora vamos a escribir una función que sume o reste 1 a `actual` para cambiar de algoritmo.
 
-Cuando el usuario apriete la flechita de la derecha, va a sumar 1; y cuando apriete la flechita de la izquierda va a 
+Cuando el usuario apriete la flechita de la derecha, va a sumar 1; y cuando apriete la flechita de la izquierda, va a 
 restar 1.
 
-Tenemos que tener presente que el índice está por debajo de 0 o por arriba de 4 (que es el largo de la lista con los 
+Tenemos que tener presente que si el índice está por debajo de 0 o por arriba de 4 (que es el largo de la lista con los 
 algoritmos) va a dar error. Dicho esto, la función quedaría así:
 
 ````python
