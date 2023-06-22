@@ -1,5 +1,6 @@
 # Paso a paso: Visualizador de algoritmos de ordenamiento
-![](/portada.png)
+![](/portada1.png)
+![](/portada2.png)
 
 En este Paso a paso vamos a hacer un visualizador de algoritmos de ordenamiento usando la librería Pygame.
 
